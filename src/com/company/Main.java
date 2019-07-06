@@ -8,9 +8,28 @@ public class Main {
     public static void main(String[] args) {
         int[] arr = {657, 123, 454, 600, 189, 661, 989, 899, 998};
         int[] arr2 = {2, 4, -1, 0, 1, 1, 1, 2};
+        int number = 325558796;
         System.out.println(solution(arr));
-        System.out.println(solution1(325558796));
+        System.out.println(solution1(number));
         System.out.println(solution2(arr2));
+    }
+
+    private static int solution(int[] arr) {
+        List<Integer> result = new ArrayList<>();
+        int temp = 0;
+        for (int i = 0; i < arr.length; i++) {
+            int sum = arr[i] / 100 + (arr[i] % 100) / 10 + arr[i] % 10;
+            if (sum == temp) {
+                result.add(arr[i]);
+            }
+            if (sum > temp) {
+                temp = sum;
+                result.clear();
+                result.add(arr[i]);
+            }
+        }
+        result.sort(Integer::compareTo);
+        return result.get(0);
     }
 
     private static int solution1(int number) {
@@ -46,23 +65,5 @@ public class Main {
             }
         }
         return result;
-    }
-
-    private static int solution(int[] arr) {
-        List<Integer> result = new ArrayList<>();
-        int temp = 0;
-        for (int i = 0; i < arr.length; i++) {
-            int sum = arr[i] / 100 + (arr[i] % 100) / 10 + arr[i] % 10;
-            if (sum == temp) {
-                result.add(arr[i]);
-            }
-            if (sum > temp) {
-                temp = sum;
-                result.clear();
-                result.add(arr[i]);
-            }
-        }
-        result.sort(Integer::compareTo);
-        return result.get(0);
     }
 }
